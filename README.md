@@ -54,7 +54,7 @@ Each tool gets an **adapter** that reads its motion (keyframes, easing, timing) 
 ## Non-goals
 
 - **Not a renderer or a player.** It describes motion; it doesn't draw it.
-- **Not a replacement for Lottie/dotLottie.** Those are interchange/runtime formats for *delivering* an animation. motion.md describes a brand's *language* — the rules a thousand animations should follow. They compose; they don't compete.
+- **Not an interchange or runtime format.** Delivery formats — a tool's native scene file, an exported clip, a vector animation — carry one *finished* animation. motion.md carries the *language* a thousand of them should share. It composes with whatever you deliver in; it doesn't compete with it.
 - **Not AI-generated motion-from-nothing.** The near-term value is making motion legible (so humans stay consistent and AI can brief/QA against it). Generation is a downstream maybe, not the premise.
 
 ## Status & roadmap
