@@ -11,9 +11,10 @@ The public open-standard repo. Spec-public; the *applied* CoSi tooling (real-bra
 - [ ] **DTCG upstream** — open the choreography-gap discussion issue (draft lives in the private applied repo); converge, don't fork.
 
 ## Decisions to make
-- [ ] **License** — CC-BY-4.0 (spec text) + Apache-2.0 (reference tooling)? Confirm before first publish.
-- [ ] **Naming** — public format = `motion.md` (here, `inkxel`); private applied repo currently `Collier-Simon/motion-md` — rename to avoid `motion.md` / `motion-md` confusion (touches `ae-render` references).
+- [x] **License — DECIDED 2026-06-19:** spec/docs = **CC-BY-4.0** (`LICENSE`); reference tooling (adapters/validator) = **Apache-2.0** when added.
+- [x] **Name — confirmed `motion.md`** (Tucker, 6/19). Note: if motion.md takes off, CoSi adopts it — public standard and CoSi's applied use converge, so there's no real conflict, just a clarity rename of the private repo when convenient.
+- [ ] **Rename private applied repo** `Collier-Simon/motion-md` → e.g. `cosi-motion` to avoid `motion.md`/`motion-md` confusion (touches `ae-render` references). Not urgent.
 - [ ] Run the `knowledge-layer` scaffolder for the full build-docs setup (this is a hand-seeded stub).
 
 ## Context
-- 2026-06-19 — repo seeded. Forked-out-the-neutral-spec move (Throughline precedent): the open standard goes public on `inkxel`; applied/brand/client work stays private. Landscape + prior-art research lives in the private applied repo's `knowledge/research/`.
+- 2026-06-19 — repo seeded **and pushed public: https://github.com/inkxel/motion.md** (default branch `main`, CC-BY-4.0). Forked-out-the-neutral-spec move (Throughline precedent): the open standard is public on `inkxel`; applied/brand/client work stays in the private `Collier-Simon/motion-md`. Landscape + prior-art research + the DTCG issue draft + Cavalry adapter scoping live in the private applied repo's `knowledge/research/`.
