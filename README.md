@@ -62,6 +62,7 @@ Three things could sink this, and they're worth naming up front:
 - **The schema might not hold.** AE handles, Cavalry's easing, and springs are genuinely different math. The bet is that one representation absorbs all three without flattening — but it might not, and the *rabbit hole* is "fixing" that by quietly lowering every motion to a bézier, which would technically validate while destroying the thing that made the motion branded. If the schema can't stay faithful across tools, the honest move is to say so.
 - **Choreography may be irreducibly per-brand.** DTCG punted on named patterns and sequences for a reason — they're hard to generalize. It's possible the choreography layer only ever expresses *one* brand's motion and doesn't standardize. That would still be useful (a per-brand `motion.md` is valuable on its own) but it wouldn't be a *standard*.
 - **A standard with no users is a doc.** Adoption isn't in our control. The DTCG-convergence path is the hedge, but the working group may decline, and external implementers may never show up. We treat that as a real risk, not an afterthought.
+- **A native tool format could become the de-facto standard.** Figma now ships motion with timeline, easing **variables**, and CSS/JSON/[motion.dev](https://motion.dev) export (Config 2026) — the way their *design* variables quietly became the design-token default. If their motion JSON becomes the format everyone targets, a separate open spec gets steamrolled. The hedge is the founding constraint: stay tool-neutral, align primitives to DTCG, treat Figma as **adapter #1** (ride the rails), and own the cross-tool, brand-choreography layer a single-app vendor has no reason to build.
 
 ## Non-goals
 
@@ -83,14 +84,17 @@ Concrete bars, not vibes:
 - Where exactly is the line between motion.md and DTCG — how much pushes **upstream** vs. stays a documented superset?
 - **Spring representation:** adopt which model — `response`/`bounce` (designer-facing) or `stiffness`/`damping`/`mass` (physics)? Whichever every tool can map to without loss.
 - Is **intent** a token property, or only an annotation in the artifact layer?
+- Does **Figma's motion JSON** become the de-facto format — and if so, do we converge on it the way we converge on DTCG, or stay deliberately above it? Does Figma Motion read/write DTCG-style tokens, or only its own variables?
 
 ## Status & roadmap
 
 - [x] Thesis + layered model (this doc)
 - [ ] Token vocabulary v0 — primitives (DTCG-aligned) + first choreography types (spring, keyframe sequence)
 - [ ] `motion.md` artifact template (prose + tokens + reference library)
-- [ ] Reference adapter: **Cavalry** (`.cv` is JSON-native + scriptable — the fastest schema-validation target)
-- [ ] Reference adapter: **After Effects** (ExtendScript → token JSON)
+- [ ] Reference adapter: **Figma Motion** (JSON / [motion.dev](https://motion.dev) export, MCP-readable — now the fastest schema-validation target, and the proving ground for the agentic round-trip)
+- [ ] Reference adapter: **Cavalry** (`.cv` is JSON-native + scriptable)
+- [ ] Reference adapter: **After Effects** (ExtendScript → token JSON) — the non-token-native case that proves neutrality
+- [ ] Interop: map the token schema cleanly to/from **[motion.dev](https://motion.dev)** (Figma's web-motion export target)
 - [ ] Validator (does a `motion.md` / token file conform?)
 - [ ] DTCG upstream: choreography token-type discussion
 
