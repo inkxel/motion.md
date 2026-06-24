@@ -12,6 +12,10 @@ Design systems govern color, type, and spacing with **tokens** — portable, nam
 
 That gap is why off-the-shelf AI motion "never works" for a brand with a real motion identity — with nothing to match against, it animates a careful brand *like PowerPoint*. The fix isn't a better model. It's giving motion the same legible, portable substrate the rest of the design system already has.
 
+**The wager.** The defensible bet isn't *documenting* motion — proprietary tools already do that. It's that **one tool-neutral token schema can capture brand choreography across radically different motion engines** — an After Effects bézier, a Cavalry easing, a spring — *without flattening them into mush* — and that an AI briefed on it then matches brand motion where vanilla AI fails. This can lose: if no single schema holds across tools without lossy compromise, motion.md collapses into just another per-tool format and the premise is dead. The whole project is an attempt to prove that bet true (or kill it cheaply).
+
+**Appetite.** An open standard, but built in **days-scale probes, not a spec committee** — one adapter at a time, easiest tool first (Cavalry, because `.cv` is already JSON), proving the schema on real motion before widening. If the round-trip doesn't hold early, that's the signal to stop, not to spec harder.
+
 ## What motion.md is
 
 Two layers, deliberately separated:
@@ -51,11 +55,34 @@ The model:
 
 Each tool gets an **adapter** that reads its motion (keyframes, easing, timing) and emits the same neutral token JSON. If one schema cleanly absorbs, say, an After Effects bézier handle *and* a Cavalry easing *and* a spring, the vocabulary is proven tool-neutral. That shared output contract is the whole game.
 
+## The hard part, honestly
+
+Three things could sink this, and they're worth naming up front:
+
+- **The schema might not hold.** AE handles, Cavalry's easing, and springs are genuinely different math. The bet is that one representation absorbs all three without flattening — but it might not, and the *rabbit hole* is "fixing" that by quietly lowering every motion to a bézier, which would technically validate while destroying the thing that made the motion branded. If the schema can't stay faithful across tools, the honest move is to say so.
+- **Choreography may be irreducibly per-brand.** DTCG punted on named patterns and sequences for a reason — they're hard to generalize. It's possible the choreography layer only ever expresses *one* brand's motion and doesn't standardize. That would still be useful (a per-brand `motion.md` is valuable on its own) but it wouldn't be a *standard*.
+- **A standard with no users is a doc.** Adoption isn't in our control. The DTCG-convergence path is the hedge, but the working group may decline, and external implementers may never show up. We treat that as a real risk, not an afterthought.
+
 ## Non-goals
 
 - **Not a renderer or a player.** It describes motion; it doesn't draw it.
 - **Not an interchange or runtime format.** Delivery formats — a tool's native scene file, an exported clip, a vector animation — carry one *finished* animation. motion.md carries the *language* a thousand of them should share. It composes with whatever you deliver in; it doesn't compete with it.
 - **Not AI-generated motion-from-nothing.** The near-term value is making motion legible (so humans stay consistent and AI can brief/QA against it). Generation is a downstream maybe, not the premise.
+
+## How we'll know it worked
+
+Concrete bars, not vibes:
+
+1. **The round-trip holds.** A known motion — a settle, an overshoot, a staggered entrance — authored *both* in Cavalry and in After Effects, extracted through their adapters, produces the **same token JSON**, with no lossy flattening. This is the tool-neutrality proof; without it, nothing else matters.
+2. **The brief beats vanilla.** In a blind review, an AI given a brand's `motion.md` catches motion violations that the same AI *without* it misses. That's the whole reason-for-being, made testable.
+3. **Someone else picks it up.** An adoption signal outside our own walls: the DTCG working group engages the choreography proposal, or at least one external implementer files an issue or uses the format. A standard is only a standard if it travels.
+
+## Open questions
+
+- Does the choreography layer (named patterns, intent) **generalize across brands**, or is it irreducibly per-brand? (Determines whether this is a *standard* or a great *per-brand artifact*.)
+- Where exactly is the line between motion.md and DTCG — how much pushes **upstream** vs. stays a documented superset?
+- **Spring representation:** adopt which model — `response`/`bounce` (designer-facing) or `stiffness`/`damping`/`mass` (physics)? Whichever every tool can map to without loss.
+- Is **intent** a token property, or only an annotation in the artifact layer?
 
 ## Status & roadmap
 
