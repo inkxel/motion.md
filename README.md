@@ -47,17 +47,17 @@ The model:
               ▲                         │
    extract    │                         │   apply / QA / generate
               │                         ▼
-   ┌──────────┴───────────┐   ┌─────────────────────────┐
+   ┌──────────┴───────────┐   ┌──────────────────────────┐
    │ adapters (per tool)  │   │ consumers (per tool/AI)  │
    │ AE · Cavalry · …     │   │ review skills · gen · …  │
-   └──────────────────────┘   └─────────────────────────┘
+   └──────────────────────┘   └──────────────────────────┘
 ```
 
 Each tool gets an **adapter** that reads its motion (keyframes, easing, timing) and emits the same neutral token JSON. If one schema cleanly absorbs, say, an After Effects bézier handle *and* a Cavalry easing *and* a spring, the vocabulary is proven tool-neutral. That shared output contract is the whole game.
 
-## The hard part, honestly
+## The hard part
 
-Three things could sink this, and they're worth naming up front:
+Three things could sink this:
 
 - **The schema might not hold.** AE handles, Cavalry's easing, and springs are genuinely different math. The bet is that one representation absorbs all three without flattening — but it might not, and the *rabbit hole* is "fixing" that by quietly lowering every motion to a bézier, which would technically validate while destroying the thing that made the motion branded. If the schema can't stay faithful across tools, the honest move is to say so.
 - **Choreography may be irreducibly per-brand.** DTCG punted on named patterns and sequences for a reason — they're hard to generalize. It's possible the choreography layer only ever expresses *one* brand's motion and doesn't standardize. That would still be useful (a per-brand `motion.md` is valuable on its own) but it wouldn't be a *standard*.
