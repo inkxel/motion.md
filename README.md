@@ -95,7 +95,9 @@ Concrete bars, not vibes:
 - [ ] Reference adapter: **Cavalry** (`.cv` is JSON-native + scriptable)
 - [ ] Reference adapter: **After Effects** (ExtendScript → token JSON) — the non-token-native case that proves neutrality
 - [ ] Interop: map the token schema cleanly to/from **[motion.dev](https://motion.dev)** (Figma's web-motion export target)
-- [ ] Validator (does a `motion.md` / token file conform?)
+- [ ] Validator / CLI (does a `motion.md` / token file conform? `lint` · export to DTCG)
+- [ ] Authoring guide ([`AUTHORING.md`](AUTHORING.md), v0) + `examples/` (format-by-example)
+- [ ] Generic authoring skill in `.agents/skills/` (procedure + gates that travel with the format)
 - [ ] DTCG upstream: choreography token-type discussion
 
 ## Contributing
